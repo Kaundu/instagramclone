@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+{% load static %}
+
+
+
+{% block content %}
+
+    {% block styles %}
+        {% bootstrap_css %}
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    {% endblock %}
+
+    <div class="container-fluid" id="ert">
+        {% for post in posts %}
+        <div class="row">
+            <div class="col-md-4"></div>
+
+            <div class="col-md-4">
+
+                <div class="card">
+                    <div class="card">
+                        <div class="card-header">{{post.user}}</div>
+                        <div class="card-body">
+                            <img src="{{ post.image.url }}" class="img-fluid">
+                        </div>
+                        <div class="card-footer">
+                            <p><strong>{{ post.user }}</strong>{{ post.caption }} </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}
