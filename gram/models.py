@@ -11,3 +11,11 @@ class Profile(models.Model):
     user_name = models.CharField(max_length=30)
     prof_pic = models.ImageField(upload_to= 'profiles/', blank=True,default="https://drawinglics.com/view/3763785/prosthetic-knowledge-wouldnt-it-be-funny-if-every-facebook-wouldnt-it-be-funny-if-every-facebook-profile-pic-was-this-via.jpg")
     bio = models.TextField(max_length=50, blank=True)
+
+
+class Post(models.Model):
+    image = models.ImageField(upload_to='posts/')
+    caption = models.TextField(max_length=50 , blank=True)
+    post_date = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User, related_name="posted_by", on_delete=models.CASCADE)
+    liker = models.ForeignKey(User, related_name='liked_by', on_delete=models.CASCADE,null=True)
