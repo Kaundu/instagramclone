@@ -19,3 +19,8 @@ class Post(models.Model):
     post_date = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, related_name="posted_by", on_delete=models.CASCADE)
     liker = models.ForeignKey(User, related_name='liked_by', on_delete=models.CASCADE,null=True)
+
+class Comment(models.Model):
+    message = models.TextField(max_length=50)
+    user = models.ForeignKey(User, related_name='commented_by', on_delete=models.CASCADE)
+    image = models.ForeignKey(Post, related_name='comment_for', on_delete=models.CASCADE)
