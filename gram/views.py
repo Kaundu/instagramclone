@@ -25,4 +25,16 @@ def profile(request,user_id=None):
     return render(request, 'profile.html', locals())
 
 
+@login_required(login_url='/accounts/login')
+def updateprofile(request):
+	if request.method == 'POST':
+		form = ProfileForm(request.POST,request.FILES, instance=request.user.profile)
+		if form.is_valid():
+			form.save()
+			return redirect('profile')
+
+	else:
+			form = ProfileForm()
+	return render(request, 'updateprofile.html',{"form":form })
+
 # Create your views here.
