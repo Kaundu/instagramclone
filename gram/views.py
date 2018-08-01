@@ -1,15 +1,22 @@
 from django.shortcuts import render
 
 from gram.models import Post, Profile
+from django.shortcuts import redirect
+from django.contrib.auth.models import User
 from friendship.models import Friend, Follow, Block
 from .forms import NewPostForm, UserForm, ProfileForm
 from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
-# @login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/')
 def index(request):
+    current_user = request.user.id
+    user = request.user
     posts = Post.objects.all()
+    if Profile.objects.filter(user = request.user).count() == 0:
+        prof = Profile(user=request.user)
+        prof.save()
     return render(request, 'index.html', locals())
 
 
@@ -40,6 +47,16 @@ def profile(request,user_id=None):
     following = len(Follow.objects.following(current_user))
     return render(request, 'profile.html', locals())
 
+@login_required
+def userprofile(request, user_id):
+    users = User.objects.get(id=user_id)
+    profile = Profile.objects.get(user=users)
+    images = Post.objects.filter(user=users)
+    followers = len(Follow.objects.followers(users))
+    following = len(Follow.objects.following(users))
+    posts = len(Image.objects.filter(user=users))
+    people_following = Follow.objects.following(request.user)
+    return render(request, 'profile/userprofile.html', {"user": users, "profile": profile, "images": images,"followers":followers, "following":following, "posts":posts, "people_following":people_following})
 
 @login_required(login_url='/accounts/login/')
 def follow(request, user_id):
@@ -59,4 +76,3 @@ def updateprofile(request):
 			form = ProfileForm()
 	return render(request, 'updateprofile.html',{"form":form })
 
-# Create your views here.
