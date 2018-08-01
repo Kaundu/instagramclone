@@ -18,28 +18,34 @@
   <div class="container-fluid">
     <div class="navbar-header">
         <i class=" navbar-brand fab fa-instagram" style='font-size:30px;color:black;border-right:solid grey 2px;padding-right:10px;'></i>
-        <h1 class="navbar-brand" style="font-family:'Billabong';font-weight:normal;font-size:42px" href="{% url 'index' %}" >Instagram</h1>
+        <h1 class="navbar-brand" style="font-family:'Billabong';font-weight:normal;font-size:42px"><a href="/" >Instagram</a></h1>
     </div>
 
     <!--The search form above-->
     <div class="col-sm-6 col-md-6">
             {% if user.is_authenticated %}
-            <ul>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li>
-                    <a href="/logout">Logout</a>
-                  </li>
-                  <li>
-                    <a href="/new/post">Post</a>
-                  </li>
-                    <li>
-                    <a href="/profile">Profile</a>
-                  </li
-                </ul>
-              </li>
-            </ul>
+                <a href="/profile/{{ user.id }}"><i class="far fa-user"></i></a>
+                <a href="/new/post"><i class="far fa-plus-square"></i></a>
+                <a href="#"><i class="far fa-heart"></i></a>
+
+
+{#            <ul>#}
+{#              <li class="dropdown">#}
+{#                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account<span class="caret"></span></a>#}
+{#                <ul class="dropdown-menu" role="menu">#}
+{#                  <li>#}
+{#                    <a href="/logout">Logout</a>#}
+{#                  </li>#}
+{#                  <li>#}
+{#                    <a href="/new/post">Post</a>#}
+{#                  </li>#}
+{#                    <li>#}
+{#                    <a href="/profile"><i class="far fa-user"></i></a>#}
+{#                  </li#}
+{#                </ul>#}
+{#              </li>#}
+{#                <a href="/profile"><i class="far fa-user"></i></a>#}
+{#            </ul>#}
             {% else %}
             <li>
               <a class='btn btn-default' href="/accounts/login">Login</a>
