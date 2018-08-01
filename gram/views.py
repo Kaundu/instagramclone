@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from gram.models import Post, Profile
+from friendship.models import Friend, Follow, Block
 from .forms import NewPostForm, UserForm, ProfileForm
 from django.contrib.auth.decorators import login_required
 
@@ -24,6 +25,12 @@ def profile(request,user_id=None):
     following = len(Follow.objects.following(current_user))
     return render(request, 'profile.html', locals())
 
+
+@login_required(login_url='/accounts/login/')
+def follow(request, user_id):
+    users = User.objects.get(id=user_id)
+    follow = Follow.objects.add_follower(request.user, users)
+    return render(request, 'profile.html', {"users": users, "follow":follow})
 
 @login_required(login_url='/accounts/login')
 def updateprofile(request):
