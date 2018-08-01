@@ -26,7 +26,7 @@ MODE=config("MODE", default="dev")
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=boo)
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 
 if config('MODE') == "dev":
