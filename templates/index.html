@@ -13,6 +13,8 @@
     {% endblock %}
 
     <div class="container-fluid" id="ert">
+
+
         {% for post in posts %}
         <div class="row">
             <div class="col-md-4"></div>
@@ -26,7 +28,7 @@
                             <img src="{{ post.image.url }}" class="img-fluid">
                         </div>
                         <div class="card-footer">
-                            <p><strong>{{ post.user }}</strong>{{ post.caption }} </p>
+                            <p><strong>{{ post.user }}</strong>  {{ post.caption }} </p>
                         </div>
                     </div>
                 </div>
